@@ -1,0 +1,13 @@
+DECLARE
+    CURSOR cur_CLIENTE IS SELECT ID FROM CLIENTE;
+    v_SEGMENTO_MERCADO_ID SEGMERCADO.ID%type := 2;
+    v_ID CLIENTE.ID%type;
+BEGIN
+    OPEN cur_CLIENTE;
+    LOOP
+        FETCH cur_CLIENTE INTO v_ID;
+        atualizar_cli_seg_mercado(v_ID, v_SEGMENTO_MERCADO_ID);
+    EXIT WHEN cur_CLIENTE%NOTFOUND;
+    END LOOP;
+    CLOSE cur_CLIENTE;
+END;
